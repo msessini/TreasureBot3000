@@ -23,9 +23,8 @@ async def classify_image():
     image_path = os.path.join(parent_dir, 'pictures', 'test.jpg')
 
     # Preprocess the image using the defined function
-    #preprocessed_image = preprocess_image('/home/muhammad/code/Muhammad-Nou/TreasureBot3000/pictures/test.jpg')
     preprocessed_image = preprocess_image(image_path)
-    # Make a prediction using your model (replace with your model call)
+    # Making prediction
     prediction = app.state.model.predict(preprocessed_image)
 
     return {"prediction": str(prediction)}
