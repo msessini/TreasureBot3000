@@ -2,6 +2,7 @@ import os
 from treasurebot.params import *
 from tensorflow.keras.models import load_model
 
+
 def get_model():
     #if MODEL_TARGET == 'local':
     current_dir = os.path.dirname(__file__)
