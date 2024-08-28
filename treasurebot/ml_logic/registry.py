@@ -5,5 +5,7 @@ from tensorflow.keras.models import load_model
 
 def get_model():
     #if MODEL_TARGET == 'local':
-    model = load_model(os.path.join(LOCAL_MODELS_PATH, 'model.keras'))
+    current_dir = os.path.dirname(__file__)
+    model_path = os.path.abspath(os.path.join(current_dir, '..', 'models', 'model_v1.h5'))
+    model = load_model(model_path)
     return model
