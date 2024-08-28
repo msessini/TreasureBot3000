@@ -23,7 +23,8 @@ async def classify_image():
     prediction = app.state.model.predict(preprocessed_image)
 
     return {"prediction": prediction}
-#
+
+
 @app.get('/')
 def root():
     return {'Mohammed': 'trash_can'}
