@@ -26,9 +26,11 @@ async def classify_image():
     preprocessed_image = preprocess_image(image_path)
     # Making prediction
     prediction = app.state.model.predict(preprocessed_image)
+    class_names = ['DrinkCans', 'GlassBottles', 'Organic', 'Paper', 'PlasticBottles']
+    res = class_names[np.argmax(prediction)]
+    return {"prediction": str(res)}
 
-    return {"prediction": str(prediction)}
-print(classify_image())
+#print(classify_image())
 #
 @app.get('/')
 def root():
