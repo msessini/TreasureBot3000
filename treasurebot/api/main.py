@@ -5,9 +5,6 @@ from treasurebot.ml_logic.registry import get_model
 from treasurebot.ml_logic.preprocessor import preprocess_image
 from treasurebot.ml_logic.data import get_picture
 
-
-
-
 # Load environment variables
 
 app = FastAPI()
