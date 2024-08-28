@@ -27,3 +27,4 @@ training_outputs/
 # Other
 pytestdebug.log
 raw_data/
+*Zone.Identifier
