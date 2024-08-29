@@ -19,6 +19,8 @@ dist/
 *.sqlite
 *.zip
 training_outputs/
+notebooks/dataset/Data/
+notebooks/dataset/subset/
 
 *.sublime-project
 *.sublime-workspace

@@ -3,3 +3,6 @@
 reinstall_package:
 	@pip uninstall -y treasurebot || :
 	@pip install -e .
+
+run_api:
+	uvicorn treasurebot.api.main:app --reload
