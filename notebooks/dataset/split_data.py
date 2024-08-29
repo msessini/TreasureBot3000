@@ -11,9 +11,11 @@ global_split = 0.35
 #
 test_split = 0.3
 val_split = 0.2
+
+classes = ['Cardboard', 'Paper', 'Glass', 'GlassBottles', 'Plastic', 'PlasticBottles', 'Aluminium', 'DrinkCans', 'Organic']
+
 # Copy files from Data to create test and train subsets
-dirs = os.listdir('Data')
-for d in dirs:
+for d in classes:
     os.mkdir(f'subset/test/{d}')
     os.mkdir(f'subset/train/{d}')
     #
