@@ -21,6 +21,7 @@ dist/
 training_outputs/
 notebooks/dataset/Data/
 notebooks/dataset/subset/
+treasurebot/models/model_v2.h5
 
 *.sublime-project
 *.sublime-workspace
