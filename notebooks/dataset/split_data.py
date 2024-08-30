@@ -7,9 +7,9 @@ os.mkdir('subset/test')
 os.mkdir('subset/train')
 os.mkdir('subset/val')
 #
-global_split = 0.35
+global_split = 0.5
 #
-test_split = 0.3
+test_split = 0.02
 val_split = 0.2
 
 classes = ['Cardboard', 'Paper', 'Glass', 'GlassBottles', 'Plastic', 'PlasticBottles', 'Aluminium', 'DrinkCans', 'Organic']
