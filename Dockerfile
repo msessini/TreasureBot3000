@@ -4,5 +4,5 @@ FROM tensorflow/tensorflow:2.10.0
 COPY requirements.txt requirements.txt
 # to reduce the unnecessary packages
 RUN pip install --no-cache-dir -r requirements.txt
-COPY Treasurebot3000 treasurebot
-CMD uvicorn treasurebot3000.api.fast:app --host 0.0.0.0 --port $PORT
+COPY treasurebot treasurebot
+CMD uvicorn treasurebot.api.fast:app --host 0.0.0.0 --port $PORT
