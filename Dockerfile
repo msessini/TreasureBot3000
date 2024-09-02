@@ -1,5 +1,6 @@
 #running with tensorflow will be more efficient than with python
 FROM tensorflow/tensorflow:2.10.0
+# WORKDIR /prod
 #FROM python:3.10.6-buster
 COPY requirements.txt requirements.txt
 # to reduce the unnecessary packages
