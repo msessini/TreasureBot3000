@@ -5,10 +5,11 @@ tensorflow==2.10.0; sys_platform != 'darwin' # Windows & Ubuntu Intel chips
 # data manipulation
 numpy==1.23.5
 matplotlib
-
-
+scikit-learn==1.3.1
+google-cloud-storage==2.14.0
+google-api-core==2.8.2
+googleapis-common-protos==1.56.4
 python-dotenv
-
 # API
 fastapi==0.108.0
 pytz
