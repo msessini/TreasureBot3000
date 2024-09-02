@@ -6,8 +6,9 @@ from treasurebot.ml_logic.preprocessor import preprocess_image
 from treasurebot.ml_logic.data import get_picture
 from treasurebot.ml_logic.model import get_label
 import cv2 as cv
-# Load environment variables
 
+
+# Load environment variables
 app = FastAPI()
 app.state.model = get_model()
 #image: UploadFile = File()

@@ -1,9 +1,7 @@
-import numpy as np 
+import numpy as np
 
-classes = ['Aluminium', 'Cardboard', 'DrinkCans', 'Glass', 'GlassBottles', 'Organic', 'Paper', 'Plastic', 'PlasticBottles']
+classes = ['Aluminium', 'DrinkCans', 'Glass', 'GlassBottles', 'Organic', 'Paperboard', 'Plastic', 'PlasticBottles']
 
 def get_label(prediction):
 
     return classes[np.argmax(prediction)]
-
-    
