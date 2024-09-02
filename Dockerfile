@@ -6,4 +6,4 @@ COPY requirements.txt requirements.txt
 # to reduce the unnecessary packages
 RUN pip install --no-cache-dir -r requirements.txt
 COPY treasurebot treasurebot
-CMD uvicorn treasurebot3000.api.fast:app --host 0.0.0.0 --port $PORT
+CMD uvicorn treasurebot.api.main:app --host 0.0.0.0 --port $PORT
