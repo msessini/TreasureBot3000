@@ -1,53 +1,62 @@
+from PIL import Image
 from treasurebot.ml_logic.data import get_picture
-
-
 
 def generate_output(class_name):
 
-    match class_name:
-        case "DrinkCans":
-            topText = "This is a drinking can! It goes to the yellow bin (Wertstofftonne)."
-            picture = get_picture("bins/yellow_bin_.png")
-            extraText = "Remember to check if your can has a deposit before throwing it away."
+    # Define the paths to the images
+    image_paths = {
+        "DrinkCans": "yellow_bin.png",
+        "GlassBottles": "glass_bin.png",
+        "PlasticBottles": "yellow_bin.png",
+        "Aluminium": "yellow_bin.png",
+        "Glass": "glass_bin.png",
+        "Plastic": "yellow_bin.png",
+        "Paperboard": "blue_bin.png",
+        "Organic": "brown_bin.png"
+    }
 
-        case "GlassBottles":
-            topText = "This is a glass bottle! It goes to the glass recycling bin (Glasiglus)."
-            picture = get_picture("bins/glass_bin_.png")
-            extraText = "Remember to check if your bottle has a deposit before throwing it away."
+    topText = ""
+    picture = None
+    extraText = ""
 
-        case "PlasticBottles":
-            topText = "This is a plastic bottle! It goes to the yellow bin (Wertstofftonne)."
-            picture = get_picture("bins/yellow_bin_.png")
-            extraText = "Remember to check if your bottle has a deposit before throwing it away."
+    if class_name == "DrinkCans":
+        topText = "This is a drinking can! It goes to the yellow bin (Wertstofftonne)."
+        picture = get_picture(image_paths[class_name])
+        extraText = "Remember to check if your can has a deposit before throwing it away."
 
-        case "Aluminium":
-            topText = "This is metal! It goes to the yellow bin (Wertstofftonne)."
-            picture = get_picture("bins/glass_bin_.png")
-            extraText = ""
+    elif class_name == "GlassBottles":
+        topText = "This is a glass bottle! It goes to the glass recycling bin (Glasiglus)."
+        picture = get_picture(image_paths[class_name])
+        extraText = "Remember to check if your bottle has a deposit before throwing it away."
 
-        case "Glass":
-            topText = "This is glass! It goes to the glass recycling bin (Glasiglus)."
-            picture = get_picture("bins/glass_bin_.png")
-            extraText = ""
+    elif class_name == "PlasticBottles":
+        topText = "This is a plastic bottle! It goes to the yellow bin (Wertstofftonne)."
+        picture = get_picture(image_paths[class_name])
+        extraText = "Remember to check if your bottle has a deposit before throwing it away."
 
-        case "Plastic":
-            topText = "This is plastic! It goes to the yellow bin (Wertstofftonne)."
-            picture = get_picture("bins/yellow_bin_.png")
-            extraText = ""
+    elif class_name == "Aluminium":
+        topText = "This is metal! It goes to the yellow bin (Wertstofftonne)."
+        picture = get_picture(image_paths[class_name])
+        extraText = ""
 
-        case "Paper":
-            topText = "This is paper! It goes to the blue bin (Altpaper)."
-            picture = get_picture("bins/blue_bin_.png")
-            extraText = ""
+    elif class_name == "Glass":
+        topText = "This is glass! It goes to the glass recycling bin (Glasiglus)."
+        picture = get_picture(image_paths[class_name])
+        extraText = ""
 
-        case "Cardboard":
-            topText = "This is cardboard! It goes to the blue bin (Altpaper)."
-            picture = get_picture("bins/blue_bin_.png")
-            extraText = ""
+    elif class_name == "Plastic":
+        topText = "This is plastic! It goes to the yellow bin (Wertstofftonne)."
+        picture = get_picture(image_paths[class_name])
+        extraText = ""
 
-        case "Organic":
-            topText = "This is organic waste! It goes to the brown bin (Biomüll)"
-            picture = get_picture("bins/brown_bin_.png")
-            extraText= ""
+    elif class_name == "Paperboard":
+        topText = "This is paper! It goes to the blue bin (Altpapier)."
+        picture = get_picture(image_paths[class_name])
+        extraText = ""
 
-return (topText, picture, extraText)
+    elif class_name == "Organic":
+        topText = "This is organic waste! It goes to the brown bin (Biomüll)"
+        picture = get_picture(image_paths[class_name])
+        extraText= ""
+
+    return topText, picture, extraText
