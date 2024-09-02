@@ -6,3 +6,6 @@ reinstall_package:
 
 run_api:
 	uvicorn treasurebot.api.main:app --reload
+
+run_app:
+	streamlit run treasurebot/web_interface/app.py
