@@ -80,7 +80,7 @@ st.markdown("<p class='caption'>Upload an image and click 'Predict' to see in wh
 
 uploaded_file = st.file_uploader("")
 
-def resize_image(image, size=(450, 400)):
+def resize_image(image, size=(400, 400)):
     img = Image.open(image) if not isinstance(image, Image.Image) else image
     img.thumbnail(size)
     return img
@@ -92,11 +92,11 @@ def image_to_base64(image):
 
 if uploaded_file:
     resized_image = resize_image(uploaded_file)
-    st.image(resized_image, caption="", use_column_width=False, width=450)
+    st.image(resized_image, caption="", use_column_width=False, width=400)
 
     with st.form("prediction_form"):
         if st.form_submit_button("Predict"):
-            api_url = "http://127.0.0.1:8000/uploadfile"
+            api_url = "https://treasurebotimg-238105714904.europe-west1.run.app/uploadfile"
             uploaded_file.seek(0)
             files = {"image": ("image.jpg", uploaded_file, "image/jpeg")}
             response = requests.post(api_url, files=files)
