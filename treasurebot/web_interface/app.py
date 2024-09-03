@@ -73,7 +73,7 @@ if uploaded_file:
 
     with st.form("prediction_form"):
         if st.form_submit_button("Predict"):
-            api_url = "http://127.0.0.1:8000/uploadfile"
+            api_url = "https://treasurebotimg-238105714904.europe-west1.run.app/uploadfile"
             uploaded_file.seek(0)
             files = {"image": ("image.jpg", uploaded_file, "image/jpeg")}
             response = requests.post(api_url, files=files)
@@ -154,4 +154,3 @@ with col1:
 if address:
     with col2:
         folium_static(make_map(address, kind))
-
