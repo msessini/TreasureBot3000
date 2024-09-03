@@ -4,9 +4,8 @@ from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
 def get_picture(name):
     # Construct the absolute path to the image
-    image_path = os.path.join(
-        '/home/belalsajal/code/belalsajal/TreasureBot3000/treasurebot/web_interface/bg_images', name
-    )
+    current_dir = os.path.dirname(__file__)
+    image_path = os.path.abspath(os.path.join(current_dir, '..', 'web_interface', 'bg_images', name))
 
     print(f"Attempting to load image from: {image_path}")
 
