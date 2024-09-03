@@ -42,7 +42,6 @@ def make_map(address, kind):
 
     m = folium.Map(location=[latitude, longitude], zoom_start=16)
 
-    print(data)
     for element in data['elements']:
 
         #url = "https://nominatim.openstreetmap.org/reverse"
