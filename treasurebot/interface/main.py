@@ -5,6 +5,8 @@ def generate_output(class_name):
 
     # Define the paths to the images
     image_paths = {
+        "Closhoes": "clothes_bin.png",
+        "Piles": "battery_bin.png",
         "DrinkCans": "yellow_bin.png",
         "GlassBottles": "glass_bin.png",
         "PlasticBottles": "yellow_bin.png",
@@ -50,12 +52,22 @@ def generate_output(class_name):
         extraText = ""
 
     elif class_name == "Paperboard":
-        topText = "This is paper/card! It goes to the blue bin (Altpapier)."
+        topText = "This is paper/cardoard! It goes to the blue bin (Altpapier)."
         picture = get_picture(image_paths[class_name])
         extraText = ""
 
     elif class_name == "Organic":
         topText = "This is organic waste! It goes to the brown bin (Bioabfall)"
+        picture = get_picture(image_paths[class_name])
+        extraText= ""
+
+    elif class_name == "Closhoes":
+        topText = "This is clothes/shoes! It goes to the clothes bin (Altkleider)"
+        picture = get_picture(image_paths[class_name])
+        extraText= ""
+
+    elif class_name == "Piles":
+        topText = "This is batteries! It goes to the batteries recycling bin (Batteriebox)"
         picture = get_picture(image_paths[class_name])
         extraText= ""
 
