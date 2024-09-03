@@ -1,5 +1,28 @@
 from PIL import Image
-from treasurebot.ml_logic.data import get_picture
+import os
+
+def get_picture(name):
+    # Construct the absolute path to the image
+    image_path = os.path.join(
+        '/home/belalsajal/code/belalsajal/TreasureBot3000/treasurebot/web_interface/bg_images', name
+    )
+
+    print(f"Attempting to load image from: {image_path}")
+
+    # Check if the file exists
+    if not os.path.exists(image_path):
+        print(f"File not found: {image_path}")
+        return None
+
+    # Load the image
+    try:
+        picture = Image.open(image_path)
+        picture = picture.resize((254, 254))  # Resize image if necessary
+        print("Image loaded successfully")
+        return picture
+    except Exception as e:
+        print(f"Error loading image: {e}")
+        return None
 
 def generate_output(class_name):
 
@@ -25,7 +48,7 @@ def generate_output(class_name):
         extraText = "Remember to check if your can has a deposit before throwing it away."
 
     elif class_name == "GlassBottles":
-        topText = "This is a glass bottle! It goes to the glass recycling bin (Glasiglus)."
+        topText = "This is a glass bottle! It goes to the glass recycling bin (Glastonne)."
         picture = get_picture(image_paths[class_name])
         extraText = "Remember to check if your bottle has a deposit before throwing it away."
 
@@ -40,7 +63,7 @@ def generate_output(class_name):
         extraText = ""
 
     elif class_name == "Glass":
-        topText = "This is glass! It goes to the glass recycling bin (Glasiglus)."
+        topText = "This is glass! It goes to the glass recycling bin (Glastonne)."
         picture = get_picture(image_paths[class_name])
         extraText = ""
 
