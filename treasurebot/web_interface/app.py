@@ -8,6 +8,8 @@ import time
 import os
 import sys
 from io import BytesIO
+from streamlit_folium import folium_static
+from map import make_map
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from treasurebot.interface.main import generate_output
@@ -135,3 +137,21 @@ if st.session_state.show_popup and (st.session_state.popup_end_time - datetime.n
     st.experimental_rerun()
 else:
     st.session_state.show_popup = False
+
+st.markdown('### Recycling map')
+
+col1, col2, col3 = st.columns(3)
+with col1:
+
+    address = st.text_input("Enter your address:", "")
+
+    kind = st.radio(
+        "What do you want to recycle ?",
+        options=["Glass", "Clothes", "Batteries"],
+        horizontal=False
+    )
+
+if address:
+    with col2:
+        folium_static(make_map(address, kind))
+
