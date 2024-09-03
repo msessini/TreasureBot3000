@@ -16,3 +16,5 @@ pytz
 uvicorn
 python-multipart
 pillow==10.4
+folium
+streamlit-folium
