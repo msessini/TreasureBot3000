@@ -8,12 +8,39 @@ import time
 import os
 import sys
 from io import BytesIO
+from streamlit_folium import folium_static
+from map import make_map
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from treasurebot.interface.main import generate_output
 
-# Set page layout to wide
-st.set_page_config(layout="wide")
+# Get the directory of the current script
+current_dir = os.path.dirname(__file__)
+print(f"Current directory: {current_dir}")
+
+# Construct the path to the image file
+image_path = os.path.join(current_dir, "bg_images", "TB.gif")
+print(f"Constructed image path: {image_path}")
+
+# Check if the file exists
+if os.path.exists(image_path):
+    with open(image_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+
+    st.markdown(f"""
+        <style>
+        .centered-image {{
+            display: flex;
+            justify-content: center;
+        }}
+        </style>
+        <div class="centered-image">
+            <img src="data:image/png;base64,{encoded_string}" width="200">
+        </div>
+    """, unsafe_allow_html=True)
+else:
+    st.error(f"Image file not found at: {image_path}")
+st.markdown("<p class='welcome-text'>Welcome to TreasureBot 🤖<br>I will help you to dispose your waste into the correct bins.</p>", unsafe_allow_html=True)#
 
 def add_bg_from_local(image_file):
     image_path = Path(__file__).parent / "bg_images" / image_file
@@ -25,7 +52,7 @@ def add_bg_from_local(image_file):
         </style>
     """, unsafe_allow_html=True)
 
-add_bg_from_local("bg6.png")
+add_bg_from_local("bgv.png")
 
 # Custom CSS for styling
 st.markdown("""
@@ -41,21 +68,19 @@ st.markdown("""
     .welcome-text { font-size: 20px; line-height: 1.2; }
     .caption { font-size: 16px; margin-top: 5px; margin-bottom: 5px; }
     .popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:9999;}
-    .popup-content{background-color:white;padding:20px;border-radius:10px;text-align:center;max-width:500px;width:80%;}
-    .popup-text{font-size:24px;font-weight:bold;margin-bottom:15px;}
-    .popup-extra{font-size:18px;font-weight:bold;margin-top:10px;color:#555;}
-    button{background-color:#007bff;color:white;border:none;padding:10px 20px;border-radius:5px;cursor:pointer;}
+    .popup-content{background-color:white;padding:10px;border-radius:10px;text-align:center;max-width:420px;width:90%;}
+    .popup-text{font-size:18px;font-weight:bold;margin-bottom:15px;}
+    .popup-extra{font-size:15px;font-weight:bold;margin-top:10px;color:#555;}
+    button{background-color:#007bff;color:white;border:none;padding:10px 15px;border-radius:4px;cursor:pointer;}
     </style>
 """, unsafe_allow_html=True)
 
 # Title and welcome message
-st.markdown("<h1 class='title'>TreasureBot 3000</h1>", unsafe_allow_html=True)
-st.markdown("<p class='welcome-text'>Welcome to TreasureBot 🤖<br>I will help you to dispose your waste into the correct bins.</p>", unsafe_allow_html=True)
 st.markdown("<p class='caption'>Upload an image and click 'Predict' to see in which bin it needs to go.</p>", unsafe_allow_html=True)
 
-uploaded_file = st.file_uploader("Choose an image...")
+uploaded_file = st.file_uploader("")
 
-def resize_image(image, size=(500, 400)):
+def resize_image(image, size=(400, 400)):
     img = Image.open(image) if not isinstance(image, Image.Image) else image
     img.thumbnail(size)
     return img
@@ -67,11 +92,11 @@ def image_to_base64(image):
 
 if uploaded_file:
     resized_image = resize_image(uploaded_file)
-    st.image(resized_image, caption="Uploaded Image", use_column_width=False, width=550)
+    st.image(resized_image, caption="", use_column_width=False, width=400)
 
     with st.form("prediction_form"):
         if st.form_submit_button("Predict"):
-            api_url = "http://127.0.0.1:8000/uploadfile"
+            api_url = "https://treasurebotimg-238105714904.europe-west1.run.app/uploadfile"
             uploaded_file.seek(0)
             files = {"image": ("image.jpg", uploaded_file, "image/jpeg")}
             response = requests.post(api_url, files=files)
@@ -88,7 +113,9 @@ if uploaded_file:
                         <div class="popup-overlay">
                             <div class="popup-content">
                                 <p class="popup-text">{top_text}</p>
-                                <img src="data:image/png;base64,{bin_image_base64}" width="400px">
+                                <img src="data:image/png;base64,{bin_image_base64}" width="330
+
+                                px">
                                 <p class="popup-extra">{extra_text}</p>
                                 <button id="closePopup">Close</button>
                             </div>
@@ -135,3 +162,20 @@ if st.session_state.show_popup and (st.session_state.popup_end_time - datetime.n
     st.experimental_rerun()
 else:
     st.session_state.show_popup = False
+
+st.markdown('### Recycling map')
+
+col1, col2, col3 = st.columns(3)
+with col1:
+
+    address = st.text_input("Enter your address:", "")
+
+    kind = st.radio(
+        "What do you want to recycle ?",
+        options=["Glass", "Clothes", "Batteries"],
+        horizontal=False
+    )
+
+if address:
+    with col2:
+        folium_static(make_map(address, kind))
