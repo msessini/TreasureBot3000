@@ -8,8 +8,6 @@ import time
 import os
 import sys
 from io import BytesIO
-from streamlit_folium import folium_static
-from map import make_map
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from treasurebot.interface.main import generate_output
@@ -19,7 +17,7 @@ current_dir = os.path.dirname(__file__)
 print(f"Current directory: {current_dir}")
 
 # Construct the path to the image file
-image_path = os.path.join(current_dir, "bg_images", "TB.gif")
+image_path = os.path.join(current_dir, "bg_images", "GIF.gif")
 print(f"Constructed image path: {image_path}")
 
 # Check if the file exists
@@ -35,7 +33,7 @@ if os.path.exists(image_path):
         }}
         </style>
         <div class="centered-image">
-            <img src="data:image/png;base64,{encoded_string}" width="200">
+            <img src="data:image/png;base64,{encoded_string}" width="340">
         </div>
     """, unsafe_allow_html=True)
 else:
@@ -80,7 +78,7 @@ st.markdown("<p class='caption'>Upload an image and click 'Predict' to see in wh
 
 uploaded_file = st.file_uploader("")
 
-def resize_image(image, size=(400, 400)):
+def resize_image(image, size=(300,350)):
     img = Image.open(image) if not isinstance(image, Image.Image) else image
     img.thumbnail(size)
     return img
@@ -92,11 +90,30 @@ def image_to_base64(image):
 
 if uploaded_file:
     resized_image = resize_image(uploaded_file)
-    st.image(resized_image, caption="", use_column_width=False, width=400)
+
+    # Custom CSS to center the image
+    st.markdown("""
+        <style>
+        .centered-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .centered-image img {
+            width: 290px;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+     # Display the image inside a centered div
+    st.markdown("<div class='centered-image'>", unsafe_allow_html=True)
+    st.image(resized_image, use_column_width=False, width=290)
+    st.markdown("</div>", unsafe_allow_html=True)
 
     with st.form("prediction_form"):
         if st.form_submit_button("Predict"):
-            api_url = "https://treasurebotimg-238105714904.europe-west1.run.app/uploadfile"
+            api_url = "http://127.0.0.1:8000/uploadfile"
             uploaded_file.seek(0)
             files = {"image": ("image.jpg", uploaded_file, "image/jpeg")}
             response = requests.post(api_url, files=files)
@@ -113,9 +130,7 @@ if uploaded_file:
                         <div class="popup-overlay">
                             <div class="popup-content">
                                 <p class="popup-text">{top_text}</p>
-                                <img src="data:image/png;base64,{bin_image_base64}" width="330
-
-                                px">
+                                <img src="data:image/png;base64,{bin_image_base64}" width="330px">
                                 <p class="popup-extra">{extra_text}</p>
                                 <button id="closePopup">Close</button>
                             </div>
@@ -130,25 +145,68 @@ if uploaded_file:
                     st.error("No image found to display.")
             else:
                 st.error(f'Error with code {response.status_code}, {response.content}')
-
+                
+st.markdown('##')
+st.markdown('##')
+st.markdown('##')
 st.markdown('##')
 st.markdown('##')
 st.markdown('##')
 
-# Rating section
-st.markdown('### How would you rate your experience?')
+# Custom CSS for styling
+st.markdown("""
+    <style>
+    .rating-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .rating-header {
+        color: #E0E0E0;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .stRadio > div {
+        display: flex;
+        justify-content: center;
+    }
+    .stButton button {
+        display: block;
+        margin: 0 auto;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+# Centered rating section
+st.markdown("<div class='rating-section'>", unsafe_allow_html=True)
+st.markdown("<div class='rating-header'>How would you rate your experience?</div>", unsafe_allow_html=True)
+
+# Radio button for rating
 rating = st.radio("", ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"], horizontal=True)
 
-if 'show_popup' not in st.session_state:
-    st.session_state.show_popup = False
-    st.session_state.popup_end_time = None
-
-if st.button("Let's Recycle"):
+# Button for submission
+if st.button("Submit"):
     if rating:
         st.session_state.show_popup = True
         st.session_state.popup_end_time = datetime.now() + timedelta(seconds=3)
     else:
         st.warning("Please select a rating before clicking 'Let's Recycle'.")
+
+st.markdown("</div>", unsafe_allow_html=True)
+
+if 'show_popup' not in st.session_state:
+    st.session_state.show_popup = False
+    st.session_state.popup_end_time = None
 
 if st.session_state.show_popup and (st.session_state.popup_end_time - datetime.now()).total_seconds() > 0:
     st.markdown("""
@@ -162,20 +220,3 @@ if st.session_state.show_popup and (st.session_state.popup_end_time - datetime.n
     st.experimental_rerun()
 else:
     st.session_state.show_popup = False
-
-st.markdown('### Recycling map')
-
-col1, col2, col3 = st.columns(3)
-with col1:
-
-    address = st.text_input("Enter your address:", "")
-
-    kind = st.radio(
-        "What do you want to recycle ?",
-        options=["Glass", "Clothes", "Batteries"],
-        horizontal=False
-    )
-
-if address:
-    with col2:
-        folium_static(make_map(address, kind))
