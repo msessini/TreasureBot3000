@@ -27,13 +27,23 @@ if os.path.exists(image_path):
 
     st.markdown(f"""
         <style>
+        .css-6qob1r{{
+                 background-color:black;}}
         .centered-image {{
             display: flex;
             justify-content: center;
         }}
+
+        .css-18ni7ap{{
+            visibility: hidden;
+        }}
+        .css-pkbazv{{
+            color: white;
+        }}
+
         </style>
         <div class="centered-image">
-            <img src="data:image/png;base64,{encoded_string}" width="340">
+            <img src="data:image/png;base64,{encoded_string}" width="330">
         </div>
     """, unsafe_allow_html=True)
 else:
@@ -100,8 +110,19 @@ if uploaded_file:
             align-items: center;
             margin-top: 20px;
         }
-        .centered-image img {
-            width: 290px;
+        .css-1v0mbdj img {
+            width: 300px;
+        }
+
+        .uploadedFile {
+            display: none;
+        }
+
+        .css-1v0mbdj {
+            display: flex;
+            justify-content: center;
+            width: 100vw;
+            flex-direction: row;
         }
         </style>
     """, unsafe_allow_html=True)
