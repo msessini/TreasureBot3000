@@ -16,3 +16,5 @@ pytz
 uvicorn
 python-multipart
 pillow==10.4
+streamlit==1.22.0
+streamlit-folium==0.22.0
