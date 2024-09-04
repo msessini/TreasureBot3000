@@ -6,6 +6,6 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 COPY treasurebot treasurebot
 COPY setup.py setup.py
-COPY treasurebot-serviceaccount.json treasurebot-serviceaccount.json
+COPY treasurebot3000-serviceaccount.json treasurebot3000-serviceaccount.json
 RUN pip install .
 CMD uvicorn treasurebot.api.main:app --host 0.0.0.0 --port $PORT

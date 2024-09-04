@@ -113,7 +113,7 @@ if uploaded_file:
 
     with st.form("prediction_form"):
         if st.form_submit_button("Predict"):
-            api_url = "http://127.0.0.1:8000/uploadfile"
+            api_url = "https://treasurebot3000-564754607351.europe-west1.run.app/uploadfile"
             uploaded_file.seek(0)
             files = {"image": ("image.jpg", uploaded_file, "image/jpeg")}
             response = requests.post(api_url, files=files)
@@ -145,7 +145,7 @@ if uploaded_file:
                     st.error("No image found to display.")
             else:
                 st.error(f'Error with code {response.status_code}, {response.content}')
-                
+
 st.markdown('##')
 st.markdown('##')
 st.markdown('##')
