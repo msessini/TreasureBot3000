@@ -116,4 +116,5 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.image(os.path.abspath(os.path.join(os.path.dirname(__file__), 'group.jpg')))
+st.image(os.path.abspath(os.path.join(os.path.dirname(__file__), 'group.jpg')), \
+    caption=('Mario Sessini, Belal Sajal, Muhammad Nouman, Farah Khalifa'))
