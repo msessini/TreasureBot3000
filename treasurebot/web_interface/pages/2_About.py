@@ -2,6 +2,7 @@ import streamlit as st
 from streamlit_folium import folium_static
 from pathlib import Path
 import base64
+import os
 
 
 # Function to add background image
@@ -32,7 +33,7 @@ st.markdown("""
         text-align: center;
         margin-bottom: 20px;
     }
-    .centered-label { 
+    .centered-label {
         color: #000000;
         font-size: 20px;
         text-align: center;
@@ -114,3 +115,5 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+st.image(os.path.abspath(os.path.join(os.path.dirname(__file__), 'group.jpg')))
