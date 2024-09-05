@@ -20,19 +20,20 @@ def add_bg_from_local(image_file):
     """, unsafe_allow_html=True)
 
 # Apply background image
-add_bg_from_local("bgv.png")
+add_bg_from_local("TBV2.png")
 
 # Apply custom CSS styling
 st.markdown("""
     <style>
      .css-16idsys p {
-        color: white;
+        color: black;
         margin: 0 auto;
         font-size: larger;
+        font-weight: bold;
     }
     /* Centered title text styling */
     .centered-text {
-        color: #E0E0E0;
+        color: #120101;
         font-size: 46px;
         font-weight: bold;
         text-align: center;
@@ -41,27 +42,30 @@ st.markdown("""
 
     .st-b3 {
         justify-content: center;
-        color: white;
+        color: black;
+        font-weight: bold;
     }
 
     .st-b3 > div {
-        color: white;
+        color:black;
+        font-weight: bold;
     }
 
     .css-6qob1r {
-        background-color:black;
+        background-color: rgb(168 192 239 / 86%);
     }
 
     .css-pkbazv {
-        color: white;
+        color:black;
     }
 
     .css-18ni7ap {
-        background-color:black;
+        background-color: #00000000;
     }
 
     .css-16idsys {
     font-family: "Source Sans Pro", sans-serif;
+    color: #000000;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,7 +74,7 @@ st.markdown("""
 
     /* Text input label and radio label styling */
     .stTextInput > div > label, .stRadio > div > label {
-        color: #E0E0E0 !important;
+        color:#000000 !important;
         font-size: 20px;
         font-weight: bold;
         text-align: center;
@@ -78,8 +82,8 @@ st.markdown("""
 
     /* Text input field styling */
     .stTextInput > div > div > input {
-        color: #E0E0E0;
-        background-color: #333333;
+        color: #000000;
+        background-color:rgb(168 192 239 / 86%);
         border-radius: 5px;
         padding: 10px;
         font-size: 18px;
