@@ -18,18 +18,19 @@ def add_bg_from_local(image_file):
         }}
         </style>
     """, unsafe_allow_html=True)
-add_bg_from_local("bgv.png")
+add_bg_from_local("TBV2.png")
 # CSS styling
 st.markdown("""
     <style>
     .centered-text {
-        color: #E0E0E0;
-        font-size: 32px;
+        color: #000000;
+        font-size: 46px;
+        font-weight: bold;
         text-align: center;
         margin-bottom: 20px;
     }
     .centered-label {
-        color: #E0E0E0;
+        color: #000000;
         font-size: 20px;
         text-align: center;
         display: block;
@@ -41,7 +42,7 @@ st.markdown("""
         margin-bottom: 20px;
     }
     .stTextInput > div > div > input {
-        color: #E0E0E0;
+        color: #000000;
         background-color: #333333;
         border-radius: 5px;
         padding: 10px;
@@ -71,11 +72,11 @@ st.markdown("""
     }
 
     .css-6qob1r{
-        background-color:black;
+        background-color: rgb(168 192 239 / 86%);
     }
 
     .css-18ni7ap{
-        background-color:black;
+        background-color: #00000000;;
     }
 
     .css-pkbazv{
@@ -88,7 +89,7 @@ st.markdown('<div class="centered-text">About</div>', unsafe_allow_html=True)
 # Centered input label and field
 st.markdown(
     """
-    <div style="color:white; font-size:18px; text-align: justify;">
+    <div style="color:black; font-size:18px; text-align: justify;">
         <p>Treasurebot 3000 is a project developed collaboratively at <a href="https://www.lewagon.com/berlin" style="color:lightblue;">Le Wagon Berlin</a> by Farah Khalifa,
         Muhammad Nouman, Belal Sajal, and Mario Sessini. This application utilizes a convolutional neural network for waste identification
         based on a pre-trained model called <a href="https://arxiv.org/abs/1512.03385" style="color:lightblue;">ResNet50</a> alongside a custom dense layer with 1024 neurons, followed by a prediction

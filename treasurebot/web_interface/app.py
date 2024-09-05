@@ -28,7 +28,8 @@ if os.path.exists(image_path):
     st.markdown(f"""
         <style>
         .css-6qob1r{{
-                 background-color:black;}}
+                background-color: rgb(168 192 239 / 86%);}}
+
         .centered-image {{
             display: flex;
             justify-content: center;
@@ -60,7 +61,7 @@ def add_bg_from_local(image_file):
         </style>
     """, unsafe_allow_html=True)
 
-add_bg_from_local("bgv.png")
+add_bg_from_local("TBV2.png")
 
 # Custom CSS for styling
 st.markdown("""
@@ -72,7 +73,7 @@ st.markdown("""
         align-items: center;
     }
     .title { font-family: 'Roboto', 'Open Sans', sans-serif; font-size: 72px; font-weight: 900; color: #FFD700; text-align: center; padding: 20px 0;}
-    .welcome-text, .caption { font-family: 'Streamlit Sans', sans-serif; font-weight: bold; color: #E0E0E0; text-align: center; margin: 0; }
+    .welcome-text, .caption { font-family: 'Streamlit Sans', sans-serif; font-weight: bold; color:#120101; text-align: center; margin: 0; }
     .welcome-text { font-size: 20px; line-height: 1.2; }
     .caption { font-size: 16px; margin-top: 5px; margin-bottom: 5px; }
     .popup-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:9999;}
@@ -186,7 +187,7 @@ st.markdown("""
         margin-top: 20px;
     }
     .rating-header {
-        color: #E0E0E0;
+        color:#120101;
         font-size: 18px;
         font-weight: bold;
         text-align: center;
