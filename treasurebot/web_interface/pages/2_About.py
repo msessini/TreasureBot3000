@@ -46,7 +46,7 @@ st.markdown("""
         background-color: #333333;
         border-radius: 5px;
         padding: 10px;
-        font-size: 18px;
+        font-size: 32px;
         text-align: center;
         margin: auto;
         display: block;
@@ -79,8 +79,15 @@ st.markdown("""
         background-color: #00000000;;
     }
 
+    .css-5rimss p{
+        font-size: 1.5rem;
+    }
+
     .css-pkbazv{
         color:white;
+    }
+    .css-1y4p8pa{
+        text-align: justify;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -89,10 +96,10 @@ st.markdown('<div class="centered-text">About</div>', unsafe_allow_html=True)
 # Centered input label and field
 st.markdown(
     """
-    <div style="color:black; font-size:18px; text-align: justify;">
-        <p>Treasurebot 3000 is a project developed collaboratively at <a href="https://www.lewagon.com/berlin" style="color:lightblue;">Le Wagon Berlin</a> by Farah Khalifa,
+    <div style="color:black; font-size:32px; text-align: justify;">
+        <p>Treasurebot 3000 is a project developed collaboratively at <a href="https://www.lewagon.com/berlin" style="color:blue;">Le Wagon Berlin</a> by Farah Khalifa,
         Muhammad Nouman, Belal Sajal, and Mario Sessini. This application utilizes a convolutional neural network for waste identification
-        based on a pre-trained model called <a href="https://arxiv.org/abs/1512.03385" style="color:lightblue;">ResNet50</a> alongside a custom dense layer with 1024 neurons, followed by a prediction
+        based on a pre-trained model called <a href="https://arxiv.org/abs/1512.03385" style="color:blue;">ResNet50</a> alongside a custom dense layer with 1024 neurons, followed by a prediction
         layer with 10 neurons corresponding to our 10 waste categories.</p>
         <p>Treasurebot 3000 can accurately identify and classify the following types of waste: glass bottles, paper/cardboard, aluminum cans, plastic, organic
         waste, glass, plastic bottles, clothes, aluminium, and batteries. When an image is uploaded, Treasurebot
