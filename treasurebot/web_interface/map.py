@@ -61,6 +61,11 @@ def make_map(address, kind):
 
         m = folium.Map(location=[latitude, longitude], zoom_start=zoom_start)
 
+        folium.Marker(
+            location=[latitude, longitude],
+            icon=folium.Icon(color="red", icon="home")
+        ).add_to(m)
+
         for element in data['elements']:
 
             #url = "https://nominatim.openstreetmap.org/reverse"
@@ -72,11 +77,6 @@ def make_map(address, kind):
             #headers = {'User-Agent': "My demo geomap app"}
 
             #response = requests.get(url, params=params, headers=headers).json()
-
-            folium.Marker(
-                location=[latitude, longitude],
-                icon=folium.Icon(color="red", icon="home")
-            ).add_to(m)
 
             folium.Marker(
                 location=[element['lat'], element['lon']],
