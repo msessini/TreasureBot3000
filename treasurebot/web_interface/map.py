@@ -57,7 +57,7 @@ def make_map(address, kind):
         if distance > 300:
             zoom_start = 15
         if distance > 800:
-            zoom_start = 14
+            zoom_start = 13
 
         m = folium.Map(location=[latitude, longitude], zoom_start=zoom_start)
 
