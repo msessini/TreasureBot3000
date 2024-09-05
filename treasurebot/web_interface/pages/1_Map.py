@@ -131,12 +131,12 @@ with st.container():
     st.markdown('<div style="width: 100%; max-width: 600px;">', unsafe_allow_html=True)
 
     # Centered input label and field
-    address = st.text_input("Enter your address:")
+    address = st.text_input("Find the nearest recycling containers around you by entering your address:")
 
     # Centered radio label and options
     kind = st.radio(
         "What do you want to recycle?",
-        options=["Glass", "Clothes", "Batteries"],
+        options=["Glass", "Clothes", "Batteries", "Pfand return"],
         horizontal=True
     )
 
@@ -145,4 +145,8 @@ st.markdown('</div>', unsafe_allow_html=True)
 
 # Display the map only if an address is provided
 if address:
-    folium_static(make_map(address, kind))
+    fmap = make_map(address, kind)
+    if not fmap:
+        st.markdown('<div class="centered-text" style="font-size: 20px;">😱 Address not found, please try something else.</div>', unsafe_allow_html=True)
+    else:
+        folium_static(fmap)

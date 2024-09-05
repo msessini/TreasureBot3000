@@ -83,6 +83,7 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
 # Centered title
 st.markdown('<div class="centered-text">About</div>', unsafe_allow_html=True)
 # Centered input label and field

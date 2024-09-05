@@ -127,6 +127,7 @@ if uploaded_file:
         </style>
     """, unsafe_allow_html=True)
 
+
      # Display the image inside a centered div
     st.markdown("<div class='centered-image'>", unsafe_allow_html=True)
     st.image(resized_image, use_column_width=False, width=290)
@@ -241,3 +242,4 @@ if st.session_state.show_popup and (st.session_state.popup_end_time - datetime.n
     st.experimental_rerun()
 else:
     st.session_state.show_popup = False
+

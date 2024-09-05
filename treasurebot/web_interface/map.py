@@ -1,5 +1,6 @@
 import requests
 import folium
+import sys
 
 def make_map(address, kind):
     url = "https://nominatim.openstreetmap.org/search"
@@ -11,58 +12,79 @@ def make_map(address, kind):
     headers = {'User-Agent': "My demo geomap app"}
 
     response = requests.get(url, params=params, headers=headers).json()
-    latitude = response[0]['lat']
-    longitude = response[0]['lon']
 
-    overpass_url = "http://overpass-api.de/api/interpreter"
+    if response:
 
-    dict_kind = {
-        "Glass": "glass_bottles",
-        "Clothes": "clothes",
-        "Batteries": "batteries"
-    }
+        latitude = response[0]['lat']
+        longitude = response[0]['lon']
 
-    distance = 100
-    N = 0
-    while N == 0:
+        overpass_url = "http://overpass-api.de/api/interpreter"
 
-        overpass_query = f"""
-        [out:json];
-        node
-        ["amenity"="recycling"]
-        ["recycling:{dict_kind[kind]}"="yes"]
-        (around:{distance},{latitude},{longitude});
-        out body;
-        """
-        response = requests.get(overpass_url, params={'data': overpass_query})
-        data = response.json()
+        dict_kind = {
+            "Glass": "glass_bottles",
+            "Clothes": "clothes",
+            "Batteries": "batteries"
+        }
 
-        N = len(data['elements'])
-        distance += 100
+        distance = 100
+        N = 0
+        while N == 0:
+            if kind == "Pfand return":
+                overpass_query = f"""
+                [out:json];
+                node
+                ["amenity"="vending_machine"]
+                ["vending"="bottle_return"]
+                (around:{distance},{latitude},{longitude});
+                out body;
+                """
+            else:
+                overpass_query = f"""
+                [out:json];
+                node
+                ["amenity"="recycling"]
+                ["recycling:{dict_kind[kind]}"="yes"]
+                (around:{distance},{latitude},{longitude});
+                out body;
+                """
+            response = requests.get(overpass_url, params={'data': overpass_query})
+            data = response.json()
 
-    m = folium.Map(location=[latitude, longitude], zoom_start=16)
+            N = len(data['elements'])
+            distance += 100
 
-    for element in data['elements']:
+        zoom_start = 16
+        if distance > 300:
+            zoom_start = 15
+        if distance > 800:
+            zoom_start = 14
 
-        #url = "https://nominatim.openstreetmap.org/reverse"
-        #params = {
-        #    'lat': element['lat'],
-        #    'lon': element['lon'],
-        #    'format': 'json'
-        #}
-        #headers = {'User-Agent': "My demo geomap app"}
+        m = folium.Map(location=[latitude, longitude], zoom_start=zoom_start)
 
-        #response = requests.get(url, params=params, headers=headers).json()
+        for element in data['elements']:
 
-        folium.Marker(
-            location=[latitude, longitude],
-            icon=folium.Icon(color="red", icon="home")
-        ).add_to(m)
+            #url = "https://nominatim.openstreetmap.org/reverse"
+            #params = {
+            #    'lat': element['lat'],
+            #    'lon': element['lon'],
+            #    'format': 'json'
+            #}
+            #headers = {'User-Agent': "My demo geomap app"}
 
-        folium.Marker(
-            location=[element['lat'], element['lon']],
-            #popup=response['address']['road'],
-            icon=folium.Icon(color="green", icon="star")
-        ).add_to(m)
+            #response = requests.get(url, params=params, headers=headers).json()
 
-    return m
+            folium.Marker(
+                location=[latitude, longitude],
+                icon=folium.Icon(color="red", icon="home")
+            ).add_to(m)
+
+            folium.Marker(
+                location=[element['lat'], element['lon']],
+                #popup=response['address']['road'],
+                icon=folium.Icon(color="green", icon="star")
+            ).add_to(m)
+
+        return m
+
+    else:
+        return None
