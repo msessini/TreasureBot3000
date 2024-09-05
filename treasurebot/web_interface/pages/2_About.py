@@ -18,18 +18,21 @@ def add_bg_from_local(image_file):
         }}
         </style>
     """, unsafe_allow_html=True)
+
 add_bg_from_local("TBV2.png")
+
 # CSS styling
 st.markdown("""
     <style>
     .centered-text {
+
         color: #000000;
         font-size: 46px;
         font-weight: bold;
         text-align: center;
         margin-bottom: 20px;
     }
-    .centered-label {
+    .centered-label { 
         color: #000000;
         font-size: 20px;
         text-align: center;
