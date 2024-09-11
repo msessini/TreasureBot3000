@@ -9,3 +9,4 @@ run_api:
 
 run_app:
 	streamlit run treasurebot/web_interface/app.py
+

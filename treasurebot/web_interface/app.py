@@ -1,3 +1,4 @@
+
 import streamlit as st
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -128,6 +129,7 @@ if uploaded_file:
         </style>
     """, unsafe_allow_html=True)
 
+
      # Display the image inside a centered div
     st.markdown("<div class='centered-image'>", unsafe_allow_html=True)
     st.image(resized_image, use_column_width=False, width=290)
@@ -148,21 +150,23 @@ if uploaded_file:
                     # Convert the bin_image to a base64 string
                     bin_image_base64 = image_to_base64(bin_image)
 
-                    st.markdown(f"""
-                        <div class="popup-overlay">
-                            <div class="popup-content">
-                                <p class="popup-text">{top_text}</p>
-                                <img src="data:image/png;base64,{bin_image_base64}" width="330px">
-                                <p class="popup-extra">{extra_text}</p>
-                                <button id="closePopup">Close</button>
+                    st.components.v1.html(f"""
+                        <div class="popup-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 99999 !important;">
+                            <div class="popup-content" style="background-color: white; padding: 20px; border-radius: 10px; text-align: center; position: relative; width: 90%; font-family: 'Roboto', 'Open Sans', sans-serif;">
+                                <p class="popup-text" style="font-size: 20px;">{top_text}</p>
+                                <img src="data:image/png;base64,{bin_image_base64}" width="330px" style="display: block; margin: 10px auto;">
+                                <p class="popup-extra" style="font-size: 16px;">{extra_text}</p>
+                                <button id="closePopup" style="padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: rgba(168, 192, 239, 0.86);">Close</button>
                             </div>
                         </div>
                         <script>
-                        document.getElementById('closePopup').addEventListener('click', function() {{
-                            document.querySelector('.popup-overlay').style.display = 'none';
-                        }});
+                            document.getElementById('closePopup').addEventListener('click', function() {{
+                                document.querySelector('.popup-overlay').style.display = 'none';
+                            }});
                         </script>
-                    """, unsafe_allow_html=True)
+                        """,
+                        height=600,  # Adjust the height based on your popup size
+                    )
                 else:
                     st.error("No image found to display.")
             else:
